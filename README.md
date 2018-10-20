@@ -58,6 +58,7 @@ spring-boot-starter-social-twitter |	使用 Spring Social Twitter |	Twitter提�
 spring-boot-starter-data-rest |	使用Spring Data REST 以 REST 方式暴露 Spring Data repositories |	自动实现数据库简单增删改查RESTful请求，适用于测试环境
 ## Spring Boot production starters
 下列 starters 可用于添加 production ready 功能
+
 |Name |Description |备注 |
 |:------:|:------: |:------: |
 spring-boot-starter-actuator |	使用Spring Boot Actuator 的 production-ready 功能来帮助你监视和管理应用	production-ready | Starter for using Spring Boot’s Actuator which provides production ready features to help you monitor and manage your application
