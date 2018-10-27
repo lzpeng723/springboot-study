@@ -13,7 +13,7 @@ public class WebApplication {
 
 	@GetMapping
 	public String hello(){
-		return "Hello World !" + LocalDateTime.now();
+		return String.format("%s : %s", LocalDateTime.now(), getClass().getName());
 	}
 
 	public static void main(String[] args) {
