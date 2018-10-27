@@ -6,7 +6,7 @@ import org.springframework.mobile.device.Device;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @RestController
 @SpringBootApplication
@@ -14,7 +14,7 @@ public class MobileApplication {
 
 	@GetMapping
 	public String hello(Device device){
-		return String.format("%s : %s %s", LocalDateTime.now().getMonth(), device, getClass().getName());
+		return String.format("%s : %s %s", new Date(), device, getClass().getName());
 	}
 
 	public static void main(String[] args) {

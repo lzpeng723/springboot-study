@@ -1,6 +1,6 @@
 rootProject.name = 'parent'
 include 'springboot-device'
 findProject(':springboot-device')?.name = 'device'
-include 'sprintboor-web'
-findProject(':sprintboor-web')?.name = 'web'
+include 'sprintboot-web'
+findProject(':sprintboot-web')?.name = 'web'
 
