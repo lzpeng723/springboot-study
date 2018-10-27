@@ -1,4 +1,4 @@
-package com.lzpeng.sprintboot.web;
+package com.lzpeng.sprintboot.mobile;
 
 import cn.hutool.extra.servlet.ServletUtil;
 import lombok.extern.slf4j.Slf4j;

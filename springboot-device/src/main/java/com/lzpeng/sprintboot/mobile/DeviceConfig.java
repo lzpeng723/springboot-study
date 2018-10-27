@@ -1,4 +1,4 @@
-package com.lzpeng.sprintboot.web;
+package com.lzpeng.sprintboot.mobile;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

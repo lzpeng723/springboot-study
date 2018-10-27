@@ -1,4 +1,4 @@
-package com.lzpeng.sprintboot.web;
+package com.lzpeng.sprintboot.mobile;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
