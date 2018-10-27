@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @RestController
 @SpringBootApplication
@@ -13,7 +13,7 @@ public class WebApplication {
 
 	@GetMapping
 	public String hello(){
-		return String.format("%s : %s", LocalDateTime.now(), getClass().getName());
+		return String.format("%s : %s", new Date(), getClass().getName());
 	}
 
 	public static void main(String[] args) {
