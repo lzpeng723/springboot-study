@@ -6,9 +6,11 @@ import org.springframework.mobile.device.Device;
 import org.springframework.mobile.device.DeviceUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+import java.util.Enumeration;
 
 @Slf4j
 public class DeviceInterceptor extends HandlerInterceptorAdapter {
@@ -17,16 +19,29 @@ public class DeviceInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        startTime = System.currentTimeMillis();
+        log.info("开始访问 {} {} {}", request.getMethod(), request.getRequestURL(), LocalDateTime.now());
         Device device = DeviceUtils.getCurrentDevice(request);
         if (device.isMobile()) {
             log.info("{} {}手机", ServletUtil.getClientIP(request), device.getDevicePlatform().name());
         } else if (device.isTablet()) {
             log.info("{} {}平板", ServletUtil.getClientIP(request), device.getDevicePlatform().name());
-        } else {
+        } else if (device.isNormal()) {
             log.info("{} 电脑", ServletUtil.getClientIP(request));
+        } else {
+            log.info("{} 未知设备", ServletUtil.getClientIP(request));
         }
-        log.info("开始访问 {} {} {}", request.getMethod(), request.getRequestURL(), LocalDateTime.now());
-        startTime = System.currentTimeMillis();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            log.info("Header {} {}", headerName, request.getHeader(headerName));
+        }
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                log.info("Cookie {} {}", cookie.getName(), cookie.getValue());
+            }
+        }
         return true;
     }
 

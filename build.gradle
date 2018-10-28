@@ -2,6 +2,7 @@
 subprojects {
     buildscript {
         ext {
+//            springBootVersion = '1.5.17.RELEASE'
             springBootVersion = '2.0.6.RELEASE'
         }
         repositories {
@@ -41,7 +42,7 @@ subprojects {
     }
     dependencies {
         compileOnly('org.projectlombok:lombok')
-        compile ('cn.hutool:hutool-all:4.1.14')
+        implementation ('cn.hutool:hutool-all:4.1.14')
         testImplementation('org.springframework.boot:spring-boot-starter-test')
     }
     jar {
