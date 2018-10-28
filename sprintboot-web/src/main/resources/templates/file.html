@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传下载</title>
+</head>
+<body>
+<p>单文件上传</p>
+<form action="/file/upload" method="post" enctype="multipart/form-data" target="nm_iframe">
+    文件:<input type="file" name="file"/>
+    <input type="submit"/>
+    <iframe name="nm_iframe" style="display:none;"></iframe>
+</form>
+<hr/>
+<p>文件下载</p>
+<a href="/file/download">下载文件</a>
+<hr/>
+<p>多文件上传</p>
+<form method="post" enctype="multipart/form-data" action="/file/uploads" target="nm_iframe">
+    <p>文件1:<input type="file" name="files"/></p>
+    <p>文件2:<input type="file" name="files"/></p>
+    <p><input type="submit" value="上传"/></p>
+    <iframe name="nm_iframe" style="display:none;"></iframe>
+</form>
+<!--<script type="application/javascript" src="/js/jquery.min.js"></script>-->
+<!--<script type="application/javascript" src="/js/jquery.form.js"></script>-->
+<!--<script type="application/javascript">-->
+    <!--$(document).ready(function(){-->
+        <!--$("#upload").click(function(){-->
+            <!--alert("123");-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+
+</body>
+</html>

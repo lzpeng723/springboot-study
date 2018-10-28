@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HelloWorldController {
 
     private Map<String, Object> data = new HashMap<>();

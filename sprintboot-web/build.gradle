@@ -3,4 +3,8 @@ apply plugin: 'io.spring.dependency-management'
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
+    //访问静态动态网页
+    implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
+    //取消严格HTML检查
+    implementation('net.sourceforge.nekohtml:nekohtml:1.9.22')
 }
