@@ -1,0 +1,6 @@
+spring:
+  datasource:
+      url: jdbc:h2:file:D:\\testdb #测试数据库地址
+  jpa:
+    hibernate:
+      ddl-auto: update #ddl策略

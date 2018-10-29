@@ -3,4 +3,6 @@ include 'springboot-device'
 findProject(':springboot-device')?.name = 'device'
 include 'sprintboot-web'
 findProject(':sprintboot-web')?.name = 'web'
+include 'springboot-data-rest'
+findProject(':springboot-data-rest')?.name = 'data-rest'
 
