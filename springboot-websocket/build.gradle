@@ -1,0 +1,12 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    //websocket长连接
+    implementation('org.springframework.boot:spring-boot-starter-websocket')
+    //访问静态动态网页
+    implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
+    //取消严格HTML检查
+    implementation('net.sourceforge.nekohtml:nekohtml:1.9.22')
+}

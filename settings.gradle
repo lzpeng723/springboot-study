@@ -5,4 +5,6 @@ include 'sprintboot-web'
 findProject(':sprintboot-web')?.name = 'web'
 include 'springboot-data-rest'
 findProject(':springboot-data-rest')?.name = 'data-rest'
+include 'springboot-websocket'
+findProject(':springboot-websocket')?.name = 'websocket'
 
