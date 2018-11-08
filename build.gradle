@@ -10,11 +10,11 @@ subprojects {
             mavenLocal()
             maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
             mavenCentral()
-            jcenter()
             maven { url "http://repo.spring.io/snapshot" }
             maven { url "http://repo.spring.io/milestone" }
             maven { url 'http://maven.springframework.org/release' }
             maven { url 'http://maven.springframework.org/milestone' }
+            jcenter()
         }
         dependencies {
             classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -27,19 +27,19 @@ subprojects {
     group = 'com.lzpeng.sprintboot'
     version = '0.0.1-SNAPSHOT'
     // JVM 版本号要求
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 11
+    targetCompatibility = 11
     // java编译的时候缺省状态下会因为中文字符而失败
     [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
     repositories {
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
         mavenCentral()
-        jcenter()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
         maven { url 'http://maven.springframework.org/release' }
         maven { url 'http://maven.springframework.org/milestone' }
+        jcenter()
     }
     dependencies {
         compileOnly('org.projectlombok:lombok')

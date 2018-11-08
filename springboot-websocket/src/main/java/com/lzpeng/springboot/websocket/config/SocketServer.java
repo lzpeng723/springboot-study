@@ -41,7 +41,7 @@ public class SocketServer {
     }
 
     public static void sendMessage(String message, String userId) {
-        Session s = sessionPool.get(userId);
+        var s = sessionPool.get(userId);
         if (s != null) {
             try {
                 s.getBasicRemote().sendText(message);
@@ -56,15 +56,11 @@ public class SocketServer {
     }
 
     public static String getOnlineUsers() {
-        StringBuffer users = new StringBuffer();
-        for (String key : sessionIds.keySet()) {
-            users.append(sessionIds.get(key) + ",");
-        }
         return String.valueOf(sessionIds.values());
     }
 
     public static void sendAll(String msg) {
-        for (String key : sessionIds.keySet()) {
+        for (var key : sessionIds.keySet()) {
             sendMessage(msg, sessionIds.get(key));
         }
     }
