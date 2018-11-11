@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket 聊天</title>
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="app">
+    <!--未登录-->
+    <div class="main" v-if="userIndex == -1">
+        <div class="login">
+            <input type="text" placeholder="请输入用户名" v-model="username"/>
+            <button @click="login">登录</button>
+        </div>
+    </div>
+    <!--已经登录-->
+    <div class="main"  v-else>
+        <!--左侧好友div-->
+        <div class="left">
+            <div class="mine" @click="currentIndex = userIndex">
+                <img src="images/me.jpg"/>
+                <span >{{user.nick}}</span>
+            </div>
+            <ul>
+                <li v-for="(item, index) in friends" :key="index" @click="currentIndex = index">
+                    <img :src="userIndex == index ? 'images/me.jpg' : 'images/you.jpg'">
+                    <span class="nick">{{item.nick}}</span>
+                    <span class="message">{{item.lastMessage}}</span>
+                    <span class="time">{{getLastTime(index)}}</span>
+                </li>
+            </ul>
+            <div>
+                <button @click="receiveMessage"> 接收测试消息</button>
+            </div>
+        </div>
+        <!--左侧好友div结束-->
+        <!--右侧聊天div-->
+        <!--与对方聊天-->
+        <div class="right" v-if="userIndex != currentIndex">
+            <div class="header">{{currentFriend.nick}}</div>
+            <div id="friendMessage" class="message">
+                <div :class="item.to == userIndex ? 'message-left' : 'message-right'" v-for="(item, index) in currentFriend.messages" :key="index">
+                    <img :src="item.to == userIndex ? 'images/you.jpg' : 'images/me.jpg'">
+                    <p>{{item.content}}</p>
+                </div>
+            </div>
+            <div class="footer">
+                <textarea placeholder="请输入内容" v-model="text"></textarea>
+                <button class="send" @click="sendMessage">发送</button>
+                <button class="clear" @click="clearInput">清空</button>
+            </div>
+        </div>
+        <!--显示个人信息-->
+        <div class="right" v-else>
+            <pre>
+                作者: 李志鹏
+                QQ: 1500913306
+                微信: lzpeng723
+                github: https://www.github.com/lzpeng723
+                码云: https://www.githee.com/lzpeng723
+            </pre>
+        </div>
+        <!--右侧聊天div结束-->
+    </div>
+
+</div>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/DateFormat.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/socket.js"></script>
+</body>
+</html>
