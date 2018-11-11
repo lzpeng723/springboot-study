@@ -2,12 +2,10 @@ package com.lzpeng.springboot.websocket.config;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -19,35 +17,32 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Slf4j
-@CrossOrigin
-@ServerEndpoint(value = "/socket/{id}")
 @Component
+@CrossOrigin
+@ServerEndpoint(value = "/socket/{userId}")
 public class SocketServer {
-
-    @Autowired
-    private ObjectMapper mapper;
 
     private Session session;
     private static Map<String, Session> sessionPool = new ConcurrentHashMap<>();
     private static Map<String, String> sessionIds = new ConcurrentHashMap<>();
 
     @OnOpen
-    public void open(Session session, @PathParam(value = "id") String id) throws JsonProcessingException {
+    public void open(Session session, @PathParam(value = "userId") String userId) {
         this.session = session;
-        sendAll(id);
-        sessionPool.put(id, session);
-        sessionIds.put(session.getId(), id);
+        sendAll(userId);
+        sessionPool.put(userId, session);
+        sessionIds.put(session.getId(), userId);
         String json = sessionIds.values().stream().collect(Collectors.joining("\",\"", "[\"", "\"]"));
-        sendMessage(json, id);
+        sendMessage(json, userId);
     }
 
     @OnMessage
-    public void onMessage(String message){
+    public void onMessage(String message) {
         JSONObject obj = JSONUtil.parseObj(message);
-        int to = obj.getInt("to");
-        String userid = List.copyOf(sessionIds.values()).get(to);
-        sendMessage(message, userid);
-        System.out.println("当前发送人sessionid为" + session.getId() + "发送内容为" + message);
+        var to = obj.getInt("to");
+        var userId = List.copyOf(sessionIds.values()).get(to);
+        sendMessage(message, userId);
+        System.out.println("当前发送人 userId 为: " + userId + ", 发送内容为: " + message);
     }
 
     @OnClose

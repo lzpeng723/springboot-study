@@ -32,12 +32,14 @@ const app = new Vue({
                 alert('请输入用户名')
                 return
             }
-            this.ws = socket.connect('ws://localhost:8080/socket/' + this.username)
+            this.ws = socket.connect('ws://192.168.43.138:3158/socket/' + this.username) //内网测试
+            // this.ws = socket.connect('ws://localhost:3158/socket/' + this.username) //本机测试
             this.ws.onclose = this.onError
             this.ws.onerror = this.onError
             this.ws.onmessage = this.onMessage
         },
         onError(event) {
+            alert('与服务器断开连接')
             this.userIndex = -1
             this.friends = []
         },
