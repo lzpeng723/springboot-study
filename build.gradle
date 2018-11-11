@@ -27,10 +27,10 @@ subprojects {
     group = 'com.lzpeng.sprintboot'
     version = '0.0.1-SNAPSHOT'
     // JVM 版本号要求
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
     // java编译的时候缺省状态下会因为中文字符而失败
-    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
     repositories {
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
@@ -43,7 +43,7 @@ subprojects {
     }
     dependencies {
         compileOnly('org.projectlombok:lombok')
-        implementation ('cn.hutool:hutool-all:4.1.14')
+        implementation('cn.hutool:hutool-all:4.1.14')
         testImplementation('org.springframework.boot:spring-boot-starter-test')
     }
     jar {
@@ -52,9 +52,10 @@ subprojects {
         }
     }
     // 显示当前项目下所有用于 compile 的 jar.
-    task listJars(description: 'Display all compile jars.') << {
-        configurations.compile.each { File file -> println file.name }
-    }
+    // Gradle 5.0 以上此任务会报错
+//    task listJars(description: 'Display all compile jars.') << {
+//        configurations.compile.each { File file -> println file.name }
+//    }
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"

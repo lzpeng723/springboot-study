@@ -1,6 +1,6 @@
 package com.lzpeng.springboot.websocket.config;
 
-import cn.hutool.json.JSONObject;
+
 import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -32,13 +32,13 @@ public class SocketServer {
         sendAll(userId);
         sessionPool.put(userId, session);
         sessionIds.put(session.getId(), userId);
-        String json = sessionIds.values().stream().collect(Collectors.joining("\",\"", "[\"", "\"]"));
+        var json = sessionIds.values().stream().collect(Collectors.joining("\",\"", "[\"", "\"]"));
         sendMessage(json, userId);
     }
 
     @OnMessage
     public void onMessage(String message) {
-        JSONObject obj = JSONUtil.parseObj(message);
+        var obj = JSONUtil.parseObj(message);
         var to = obj.getInt("to");
         var userId = List.copyOf(sessionIds.values()).get(to);
         sendMessage(message, userId);
@@ -47,7 +47,7 @@ public class SocketServer {
 
     @OnClose
     public void onClose() {
-        int index = List.copyOf(sessionIds.keySet()).indexOf(session.getId());
+        var index = List.copyOf(sessionIds.keySet()).indexOf(session.getId());
         sessionPool.remove(sessionIds.get(session.getId()));
         sessionIds.remove(session.getId());
         sendAll(String.valueOf(index));
@@ -59,10 +59,10 @@ public class SocketServer {
     }
 
     public static void sendMessage(String message, String userId) {
-        var s = sessionPool.get(userId);
-        if (s != null) {
+        var session = sessionPool.get(userId);
+        if (session != null) {
             try {
-                s.getBasicRemote().sendText(message);
+                session.getBasicRemote().sendText(message);
             } catch (IOException e) {
                 e.printStackTrace();
             }
